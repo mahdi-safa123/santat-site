@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0161)file:///C:/Users/lenovo/Desktop/111%D9%86%D8%B8%D8%A7%D9%85%20%D8%A7%D9%84%D9%86%D9%82%D8%A7%D8%B7%20-%20%D9%85%D9%88%D9%82%D8%B9%20%D8%AC%D8%AF%D9%8A%D8%AF.html -->
+<html lang="ar"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>نظام النقاط - موقع جديد</title>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  padding: 20px;
+  background-color: #121212;
+  color: #ffffff;
+}
+.card {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+}
+input, button {
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 16px;
+  width: 300px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+button {
+  margin-left: 10px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+th, td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: center;
+}
+th {
+  background-color: #333;
+  color: #fff;
+}
+#notification {
+  background: #1e4620;
+  border: 1px solid #4caf50;
+  color: #b2fab4;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.review-button {
+  background-color: #388e3c;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.review-button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+#auditLogTable td {
+  background-color: #1a1a1a;
+  border: 1px solid #555;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+#auditLogTable td[contenteditable="true"] {
+  background-color: #262626;
+}
+
+</style>
+</head>
+<body>
+  
+<h1 style="text-align:center; font-size:32px; color:#222; margin-bottom:20px;">🪙 شراء نقاط سنتات</h1>
+
+<div class="card" style="text-align:center; background:#222; border:1px solid #4caf50; max-width:400px; margin: 0 auto 20px;">
+  <h2 style="color:#4caf50;">💰 رصيد القاصة</h2>
+  <input type="text" id="safeAmount" value="0" style="width: 300px; font-size: 28px; text-align:center; font-weight:bold;">
+</div>
+
+<h2>🧮 نظام النقاط (معادلة جديدة)</h2>
+
+  <div id="notification">✅ تم احتساب السعر وإضافته إلى السجل بنجاح.</div>
+
+  <div class="card">
+    👤 اسم المحاسب: <input type="text" id="accountant"><br>
+
+    👥 اسم المستخدم: <input type="text" id="username"><br>
+    🔢 رمز الإحالة: <input type="text" id="ref"><br>
+    💬 عدد النقاط: <input type="text" id="points"><br>
+    <button onclick="calculateAndSave()">احسب السعر وأضف للسجل</button>
+    <button id="reviewBtn" class="review-button" onclick="handleReview()" disabled="">✔️ تدقيق</button>
+    <div id="result" style="margin-top:10px;font-weight:bold;">434,267 دينار</div>
+  </div>
+
+  <div class="card">
+    <h3>📋 السجل</h3>
+    <table id="logTable">
+      <thead>
+        <tr>
+          <th>التاريخ</th>
+          <th>اسم المستخدم</th>
+          <th>رمز الإحالة</th>
+          <th>النقاط</th>
+          <th>السعر</th>
+          <th>مراجعة</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٧:١٢:٢٣ م</td>
+    <td>البصراويه</td>
+    <td>13122114723</td>
+    <td>1,644,950</td>
+    <td>434,267</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٧:١١:٣٨ م</td>
+    <td>زهير</td>
+    <td>21022295347</td>
+    <td>1,310,103</td>
+    <td>345,867</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٧:٠٥:٤٦ م</td>
+    <td>سيف</td>
+    <td>04122095791</td>
+    <td>1,000,000</td>
+    <td>264,000</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٧:٠٥:٠٣ م</td>
+    <td>البصراوي</td>
+    <td>11032334091</td>
+    <td>3,900,000</td>
+    <td>1,029,600</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٧:٠٠:٥٥ م</td>
+    <td>كامل الشريفي</td>
+    <td>04042390934</td>
+    <td>700,000</td>
+    <td>184,800</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٧:٠٠:٠٣ م</td>
+    <td>السفير</td>
+    <td>27112081461</td>
+    <td>700,000</td>
+    <td>184,800</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٦:٥٩:١٥ م</td>
+    <td>علي الشريفي</td>
+    <td>03042388647</td>
+    <td>700,000</td>
+    <td>184,800</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٦:٤٢:٢٨ م</td>
+    <td>سجاد الاسدي</td>
+    <td>08071686815</td>
+    <td>600,000</td>
+    <td>158,400</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٦:٣٥:٣٨ م</td>
+    <td>فضل صالح</td>
+    <td>08041435019</td>
+    <td>242,465</td>
+    <td>64,011</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٦:٣٤:٥٨ م</td>
+    <td>صالح مغامس</td>
+    <td>29091950958</td>
+    <td>707,200</td>
+    <td>186,701</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٦:٣٤:٠٣ م</td>
+    <td>فضل صالح</td>
+    <td>22102000834</td>
+    <td>1,874,312</td>
+    <td>494,818</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٥:٤١:٢٠ م</td>
+    <td>حسوني الكرواتي</td>
+    <td>1409675901</td>
+    <td>560,000</td>
+    <td>147,840</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٥:٣٨:٥٦ م</td>
+    <td>HAYDAR</td>
+    <td>2910868918</td>
+    <td>1,349,000</td>
+    <td>356,136</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٥:٣٧:٥٨ م</td>
+    <td>karar</td>
+    <td>18051534369</td>
+    <td>2,439,600</td>
+    <td>644,054</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٥:٣٠:٤٠ م</td>
+    <td>تصفير حاسبه حوراء </td>
+    <td>80</td>
+    <td>7</td>
+    <td>2</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٥:٣٠:٢٢ م</td>
+    <td>تصفير حاسبه حوراء </td>
+    <td>80</td>
+    <td>1,200</td>
+    <td>317</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٥:٣٠:٠٠ م</td>
+    <td>تصفير حاسبه حوراء </td>
+    <td>80</td>
+    <td>117,424</td>
+    <td>31,000</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٥:٢٩:١٥ م</td>
+    <td>تصفير حاسبه حوراء </td>
+    <td>80</td>
+    <td>2,000,000</td>
+    <td>528,000</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٥:٢٨:٣٥ م</td>
+    <td>تصفير حاسبه حوراء </td>
+    <td>80</td>
+    <td>15,516,666</td>
+    <td>4,096,400</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٤:٢٤:٣٩ م</td>
+    <td>hamld</td>
+    <td>12091910673</td>
+    <td>718,549</td>
+    <td>189,697</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٢:١٤:٠١ م</td>
+    <td>محمد البصراوي </td>
+    <td>24111041014</td>
+    <td>8,901,607</td>
+    <td>2,350,024</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٢:١٢:٠١ م</td>
+    <td>ذو الجلال والاكرام</td>
+    <td>0411919633</td>
+    <td>1,742,430</td>
+    <td>460,002</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٢:١٠:٤٣ م</td>
+    <td>zoN</td>
+    <td>2205409841</td>
+    <td>127,431</td>
+    <td>33,642</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٢:٠٩:٢٣ م</td>
+    <td>مسره</td>
+    <td>1808578403</td>
+    <td>410,000</td>
+    <td>108,240</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ٢:٠٨:٣٨ م</td>
+    <td>ريحانه</td>
+    <td>09121117671</td>
+    <td>375,000</td>
+    <td>99,000</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٥٤:٠٨ م</td>
+    <td>خواتي </td>
+    <td>20011222980</td>
+    <td>1,105,000</td>
+    <td>291,720</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٥٢:٣٨ م</td>
+    <td>سيد منقذ </td>
+    <td>1808577798</td>
+    <td>2,429,259</td>
+    <td>641,324</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٥٠:٢٦ م</td>
+    <td>سيد منقذ </td>
+    <td>1808577798</td>
+    <td>24,292,559</td>
+    <td>6,413,236</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٥٠:٠٠ م</td>
+    <td>سيد منقذ </td>
+    <td>1808577798</td>
+    <td>268,500</td>
+    <td>70,884</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٤٩:١٠ م</td>
+    <td>علي اسماعيل  </td>
+    <td>01031355178</td>
+    <td>1,717,070</td>
+    <td>453,306</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٤٨:٣٣ م</td>
+    <td>ثامر البصراوي </td>
+    <td>25052611046</td>
+    <td>3,308,369</td>
+    <td>873,409</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٤١:٥٩ م</td>
+    <td>عمار علي</td>
+    <td>15061600960</td>
+    <td>3,112,551</td>
+    <td>821,713</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٤٠:٥١ م</td>
+    <td>حسين بشير</td>
+    <td>05022246570</td>
+    <td>740,000</td>
+    <td>195,360</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٣٩:٤٦ م</td>
+    <td>بهاء سلمان </td>
+    <td>17071725313</td>
+    <td>1,140,000</td>
+    <td>300,960</td>
+    <td>—</td>
+  </tr><tr>
+    <td>٣٠‏/٦‏/٢٠٢٥ ١:٣٨:٢٦ م</td>
+    <td>احمد ماجد</td>
+    <td>12071704671</td>
+    <td>250,000</td>
+    <td>66,000</td>
+    <td>—</td>
+  </tr></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>📝 سجل التدقيق</h3>
+    <table id="auditLogTable">
+      <thead>
+        <tr>
+          <th>التاريخ</th>
+          <th>اسم المستخدم</th>
+          <th>رمز الإحالة</th>
+          <th>النقاط</th>
+          <th>السعر</th>
+          <th>مراجعة</th>
+          <th>اسم المحاسب</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:١٢:٢٦ م</td>
+    <td contenteditable="true">البصراويه</td>
+    <td contenteditable="true">13122114723</td>
+    <td contenteditable="true">1,644,950</td>
+    <td contenteditable="true">434,267</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:١١:٤١ م</td>
+    <td contenteditable="true">زهير البصراوي</td>
+    <td contenteditable="true">21022295347 خطا في الحساب</td>
+    <td contenteditable="true">1,310,103</td>
+    <td contenteditable="true">345,867</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:٠٥:٤٧ م</td>
+    <td contenteditable="true">سيف</td>
+    <td contenteditable="true">04122095791</td>
+    <td contenteditable="true">1,000,000</td>
+    <td contenteditable="true">264,000</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:٠٥:٠٦ م</td>
+    <td contenteditable="true">البصراوي</td>
+    <td contenteditable="true">11032334091</td>
+    <td contenteditable="true">3,900,000</td>
+    <td contenteditable="true">1,029,600</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:٠٠:٥٧ م</td>
+    <td contenteditable="true">كامل الشريفي</td>
+    <td contenteditable="true">04042390934</td>
+    <td contenteditable="true">700,000</td>
+    <td contenteditable="true">184,800</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:٠٠:٠٧ م</td>
+    <td contenteditable="true">السفير</td>
+    <td contenteditable="true">27112081461</td>
+    <td contenteditable="true">700,000</td>
+    <td contenteditable="true">184,800</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٥٩:٢٨ م</td>
+    <td contenteditable="true">علي الشريفي</td>
+    <td contenteditable="true">03042388647</td>
+    <td contenteditable="true">700,000</td>
+    <td contenteditable="true">184,800</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٤٣:٣٢ م</td>
+    <td contenteditable="true">سجاد الاسدي</td>
+    <td contenteditable="true">08071686815</td>
+    <td contenteditable="true">600,000</td>
+    <td contenteditable="true">158,400</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٣٥:٤٠ م</td>
+    <td contenteditable="true">فضل صالح</td>
+    <td contenteditable="true">08041435019</td>
+    <td contenteditable="true">242,465</td>
+    <td contenteditable="true">64,011</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٣٥:٠٢ م</td>
+    <td contenteditable="true">صالح مغامس</td>
+    <td contenteditable="true">29091950958</td>
+    <td contenteditable="true">707,200</td>
+    <td contenteditable="true">186,701</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٣٤:٠٨ م</td>
+    <td contenteditable="true">فضل صالح</td>
+    <td contenteditable="true">22102000834</td>
+    <td contenteditable="true">1,874,312</td>
+    <td contenteditable="true">494,818</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٤٢:٢٦ م</td>
+    <td contenteditable="true">حسوني الكرواتي</td>
+    <td contenteditable="true">1409675901</td>
+    <td contenteditable="true">560,000</td>
+    <td contenteditable="true">147,840</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٩:٠٠ م</td>
+    <td contenteditable="true">HAYDAR</td>
+    <td contenteditable="true">2910868918</td>
+    <td contenteditable="true">1,349,000</td>
+    <td contenteditable="true">356,136</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٨:٠١ م</td>
+    <td contenteditable="true">karar</td>
+    <td contenteditable="true">18051534369</td>
+    <td contenteditable="true">2,439,600</td>
+    <td contenteditable="true">644,054</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٤:٢٦:٠٣ م</td>
+    <td contenteditable="true">hamld</td>
+    <td contenteditable="true">12091910673</td>
+    <td contenteditable="true">718,549</td>
+    <td contenteditable="true">189,697</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:١٤:٠٥ م</td>
+    <td contenteditable="true">محمد البصراوي </td>
+    <td contenteditable="true">24111041014</td>
+    <td contenteditable="true">8,901,607</td>
+    <td contenteditable="true">2,350,024</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:١٢:٠٨ م</td>
+    <td contenteditable="true">ذو الجلال والاكرام</td>
+    <td contenteditable="true">0411919633</td>
+    <td contenteditable="true">1,742,430</td>
+    <td contenteditable="true">460,002</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:١٠:٤٨ م</td>
+    <td contenteditable="true">zoN</td>
+    <td contenteditable="true">2205409841</td>
+    <td contenteditable="true">127,431</td>
+    <td contenteditable="true">33,642</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:٠٩:٤٣ م</td>
+    <td contenteditable="true">مسره</td>
+    <td contenteditable="true">1808578403</td>
+    <td contenteditable="true">410,000</td>
+    <td contenteditable="true">108,240</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:٠٨:٤١ م</td>
+    <td contenteditable="true">ريحانه</td>
+    <td contenteditable="true">09121117671</td>
+    <td contenteditable="true">375,000</td>
+    <td contenteditable="true">99,000</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٥٤:١٠ م</td>
+    <td contenteditable="true">خواتي </td>
+    <td contenteditable="true">20011222980</td>
+    <td contenteditable="true">1,105,000</td>
+    <td contenteditable="true">291,720</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٥٢:٤٢ م</td>
+    <td contenteditable="true">سيد منقذ </td>
+    <td contenteditable="true">1808577798</td>
+    <td contenteditable="true">2,429,259</td>
+    <td contenteditable="true">641,324</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٥٠:٠١ م</td>
+    <td contenteditable="true">سيد منقذ </td>
+    <td contenteditable="true">1808577798</td>
+    <td contenteditable="true">268,500</td>
+    <td contenteditable="true">70,884</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٤٩:١٢ م</td>
+    <td contenteditable="true">علي اسماعيل  </td>
+    <td contenteditable="true">01031355178</td>
+    <td contenteditable="true">1,717,070</td>
+    <td contenteditable="true">453,306</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٤٨:٣٥ م</td>
+    <td contenteditable="true">ثامر البصراوي </td>
+    <td contenteditable="true">25052611046</td>
+    <td contenteditable="true">3,308,369</td>
+    <td contenteditable="true">873,409</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٤٢:٠١ م</td>
+    <td contenteditable="true">عمار علي</td>
+    <td contenteditable="true">15061600960</td>
+    <td contenteditable="true">3,112,551</td>
+    <td contenteditable="true">821,713</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٤٠:٥٩ م</td>
+    <td contenteditable="true">حسين بشير</td>
+    <td contenteditable="true">05022246570</td>
+    <td contenteditable="true">740,000</td>
+    <td contenteditable="true">195,360</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٣٩:٥٠ م</td>
+    <td contenteditable="true">بهاء سلمان </td>
+    <td contenteditable="true">17071725313</td>
+    <td contenteditable="true">1,140,000</td>
+    <td contenteditable="true">300,960</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٣٨:٣٩ م</td>
+    <td contenteditable="true">احمد ماجد</td>
+    <td contenteditable="true">12071704671</td>
+    <td contenteditable="true">250,000</td>
+    <td contenteditable="true">66,000</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr></tbody>
+    </table>
+    <h4>📊 مجموع نقاط التدقيق: <span id="auditPointsSum">44,073,396</span></h4>
+    <h4>💰 مجموع السعر: <span id="auditTotalPrice">11,635,375</span> دينار</h4>
+    <div style="text-align:center; margin-top:15px;">
+      <button onclick="printAuditOnly()">🖨️ طباعة سجل التدقيق فقط</button>
+    </div>
+  </div>
+
+    <div style="text-align:center; margin-top:15px;">
+      <button onclick="saveAuditLog()">💾 حفظ سجل التدقيق</button>
+    </div>
+
+
+
+  <div class="card">
+    <h3>📘 سجل حركات القاصة</h3>
+    👤 المحاسب المسؤول: <input type="text" id="safeSource" placeholder="مثلاً: أحمد"><br>
+    💰 مبلغ الإضافة: <input type="text" id="safeAddAmount" placeholder="مثلاً: 100000"><br>
+    <button onclick="addSafeLog()">➕ إضافة رصيد إلى القاصة</button>
+
+    <table id="safeLogTable" style="margin-top:20px;">
+      <thead>
+        <tr>
+          <th>التاريخ</th>
+          <th>العملية</th>
+          <th>المبلغ</th>
+          <th>المصدر</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:١٢:٢٣ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">434,267</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:١١:٣٨ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">345,867</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:٠٥:٤٦ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">264,000</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:٠٥:٠٣ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">1,029,600</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:٠٠:٥٥ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">184,800</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٧:٠٠:٠٣ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">184,800</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٥٩:١٥ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">184,800</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٥٣:٥٢ م</td>
+    <td contenteditable="true">إضافة</td>
+    <td contenteditable="true">2,500,000</td>
+    <td contenteditable="true">علي صفاء</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٤٢:٢٨ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">158,400</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٣٥:٣٨ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">64,011</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٣٤:٥٨ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">186,701</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٦:٣٤:٠٣ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">494,818</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٥١:١٤ م</td>
+    <td contenteditable="true">إضافة</td>
+    <td contenteditable="true">1,649,000</td>
+    <td contenteditable="true">علي صفاء</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٤١:٢٠ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">147,840</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٨:٥٦ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">356,136</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٧:٥٨ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">644,054</td>
+    <td contenteditable="true">بنين قصي</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٥:٥٨ م</td>
+    <td contenteditable="true">إضافة</td>
+    <td contenteditable="true">1,000,000</td>
+    <td contenteditable="true">علي صفاء</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٥:٢٦ م</td>
+    <td contenteditable="true">إضافة</td>
+    <td contenteditable="true">1,000,000</td>
+    <td contenteditable="true">علي صفاء</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٠:٤٠ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">2</td>
+    <td contenteditable="true">مهدي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٠:٢٢ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">317</td>
+    <td contenteditable="true">مهدي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٣٠:٠٠ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">31,000</td>
+    <td contenteditable="true">مهدي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٢٩:١٥ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">528,000</td>
+    <td contenteditable="true">مهدي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٢٨:٣٥ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">4,096,400</td>
+    <td contenteditable="true">مهدي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٥:٢٥:٤٩ م</td>
+    <td contenteditable="true">إضافة</td>
+    <td contenteditable="true">8,000</td>
+    <td contenteditable="true">نسبه الكسور</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٤:٢٤:٣٩ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">189,697</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:١٤:٠١ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">2,350,024</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:١٢:٠١ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">460,002</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:١٠:٤٣ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">33,642</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:٠٩:٢٣ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">108,240</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ٢:٠٨:٣٨ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">99,000</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٥٤:٠٨ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">291,720</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٥٢:٣٨ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">641,324</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٥٢:٢١ م</td>
+    <td contenteditable="true">إضافة</td>
+    <td contenteditable="true">6,413,236</td>
+    <td contenteditable="true">غلط ب اسم سيد منقذ</td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٥٠:٢٦ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">6,413,236</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٥٠:٠٠ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">70,884</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٤٩:١٠ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">453,306</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٤٨:٣٣ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">873,409</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٤١:٥٩ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">821,713</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٤٠:٥١ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">195,360</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٣٩:٤٦ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">300,960</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٣٨:٢٦ م</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">66,000</td>
+    <td contenteditable="true">حوراء علي </td>
+  </tr><tr>
+    <td contenteditable="true">٣٠‏/٦‏/٢٠٢٥ ١:٣٤:٠٩ م</td>
+    <td contenteditable="true">إضافة</td>
+    <td contenteditable="true">11,603,000</td>
+    <td contenteditable="true">مهدي</td>
+  </tr></tbody>
+    </table>
+  </div>
+
+
+<script>
+let reviewUsed = false;
+
+function calculateAndSave() {
+  const username = document.getElementById("username").value;
+  const ref = document.getElementById("ref").value;
+  const accountant = document.getElementById("accountant").value;
+  const pointsInput = document.getElementById("points");
+  const points = parseInt(pointsInput.value.replace(/[^\d]/g, "")) || 0;
+  const resultElem = document.getElementById("result");
+  const notifyElem = document.getElementById("notification");
+  notifyElem.textContent = "";
+
+  if (!points || points <= 0) {
+    resultElem.innerText = "❗ يرجى إدخال عدد نقاط صحيح.";
+    return;
+  }
+
+  const price = Math.round((points / 5000) * 1320);
+  const safeInput = document.getElementById("safeAmount");
+  let safeAmount = parseInt(safeInput.value.replace(/[^\d]/g, "")) || 0;
+
+  if (price > safeAmount) {
+    resultElem.innerText = "❗ لا يوجد رصيد كافٍ في القاصة.";
+    return;
+  }
+
+  
+// استقطاع السعر من القاصة
+  safeAmount -= price;
+  safeInput.value = safeAmount.toLocaleString();
+
+  resultElem.innerText = price.toLocaleString() + " دينار";
+  notifyElem.textContent = "✅ تم احتساب السعر وإضافته إلى السجل بنجاح.";
+
+  const table = document.querySelector("#logTable tbody");
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${new Date().toLocaleString("ar-EG")}</td>
+    <td>${username}</td>
+    <td>${ref}</td>
+    <td>${points.toLocaleString()}</td>
+    <td>${price.toLocaleString()}</td>
+    <td>—</td>
+  `;
+  table.insertBefore(row, table.firstChild);
+  reviewUsed = false;
+  document.getElementById("reviewBtn").disabled = false;
+  pointsInput.value = "";
+}
+
+function handleReview() {
+  if (reviewUsed) return;
+  markReviewed();
+  document.getElementById("reviewBtn").disabled = true;
+  reviewUsed = true;
+}
+
+function markReviewed() {
+  const table = document.querySelector("#logTable tbody");
+  const auditTable = document.querySelector("#auditLogTable tbody");
+  const firstRow = table.rows[0];
+  if (!firstRow) return;
+
+  const cols = Array.from(firstRow.cells).map(td => td.textContent);
+  const accountant = document.getElementById("accountant").value;
+
+  const auditRow = document.createElement("tr");
+  auditRow.innerHTML = `
+    <td contenteditable="true">${new Date().toLocaleString("ar-EG")}</td>
+    <td contenteditable="true">${cols[1]}</td>
+    <td contenteditable="true">${cols[2]}</td>
+    <td contenteditable="true">${cols[3]}</td>
+    <td contenteditable="true">${cols[4]}</td>
+    <td contenteditable="true">✓</td>
+    <td contenteditable="true">${accountant}</td>
+  `;
+  auditTable.insertBefore(auditRow, auditTable.firstChild);
+  updateAuditPointsSum();
+}
+
+function updateAuditPointsSum() {
+  const rows = document.querySelectorAll("#auditLogTable tbody tr");
+  let total = 0;
+  rows.forEach(row => {
+    const pts = row.cells[3]?.textContent?.replace(/[^\d]/g, "") || "0";
+    total += parseInt(pts) || 0;
+  });
+  document.getElementById("auditPointsSum").textContent = total.toLocaleString();
+  
+    let totalPrice = 0;
+    rows.forEach(row => {
+        const price = row.cells[4]?.textContent?.replace(/[^\d]/g, "") || "0";
+        totalPrice += parseInt(price) || 0;
+    });
+    document.getElementById("auditTotalPrice").textContent = totalPrice.toLocaleString();
+    
+}
+
+function printAuditOnly() {
+  const auditTable = document.getElementById("auditLogTable").outerHTML;
+  const w = window.open("", "", "width=800,height=600");
+  w.document.write("<html><head><title>طباعة سجل التدقيق</title></head><body>");
+  w.document.write("<h2>سجل التدقيق</h2>");
+  w.document.write(auditTable);
+  w.document.write("</body></html>");
+  w.document.close();
+  w.print();
+}
+
+document.getElementById("points").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    calculateAndSave();
+  }
+});
+
+document.addEventListener("keydown", function(e) {
+  const active = document.activeElement;
+  if (!active || !active.isContentEditable) return;
+
+  const td = active;
+  const tr = td.parentElement;
+  const rowIndex = tr.rowIndex;
+  const cellIndex = td.cellIndex;
+
+  let target;
+  if (e.key === "ArrowDown") {
+    const nextRow = tr.nextElementSibling;
+    if (nextRow) target = nextRow.cells[cellIndex];
+  } else if (e.key === "ArrowUp") {
+    const prevRow = tr.previousElementSibling;
+    if (prevRow && prevRow.rowIndex > 0) target = prevRow.cells[cellIndex];
+  } else if (e.key === "ArrowLeft") {
+    if (cellIndex > 0) target = tr.cells[cellIndex - 1];
+  } else if (e.key === "ArrowRight") {
+    if (cellIndex < tr.cells.length - 1) target = tr.cells[cellIndex + 1];
+  }
+
+  if (target && target.isContentEditable) {
+    e.preventDefault();
+    target.focus();
+  }
+});
+
+
+const topInputs = Array.from(document.querySelectorAll('#accountant, #username, #ref, #points'));
+
+topInputs.forEach((input, idx) => {
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' && idx < topInputs.length - 1) {
+      e.preventDefault();
+      topInputs[idx + 1].focus();
+    } else if (e.key === 'ArrowUp' && idx > 0) {
+      e.preventDefault();
+      topInputs[idx - 1].focus();
+    }
+  });
+});
+
+
+// تنسيق إدخال القاصة بالفواصل
+document.addEventListener("DOMContentLoaded", function () {
+  const safeInput = document.getElementById("safeAmount");
+  safeInput.addEventListener("input", function () {
+    let raw = this.value.replace(/[^\d]/g, "");
+    this.value = parseInt(raw || "0").toLocaleString();
+  });
+});
+
+
+function saveAuditLog() {
+  const rows = document.querySelectorAll("#auditLogTable tbody tr");
+  const data = [];
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    data.push({
+      التاريخ: cells[0]?.textContent.trim(),
+      المستخدم: cells[1]?.textContent.trim(),
+      الرمز: cells[2]?.textContent.trim(),
+      النقاط: cells[3]?.textContent.trim(),
+      السعر: cells[4]?.textContent.trim(),
+      مراجعة: cells[5]?.textContent.trim(),
+      المحاسب: cells[6]?.textContent.trim()
+    });
+  });
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "سجل_التدقيق.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+function addSafeLog() {
+  const source = document.getElementById("safeSource").value.trim();
+  const addAmountInput = document.getElementById("safeAddAmount");
+  const amount = parseInt(addAmountInput.value.replace(/[^\d]/g, "")) || 0;
+  if (!amount || amount <= 0 || !source) {
+    alert("يرجى إدخال مصدر صحيح ومبلغ أكبر من صفر.");
+    return;
+  }
+
+  const safeInput = document.getElementById("safeAmount");
+  let safeAmount = parseInt(safeInput.value.replace(/[^\d]/g, "")) || 0;
+  safeAmount += amount;
+  safeInput.value = safeAmount.toLocaleString();
+
+  const table = document.querySelector("#safeLogTable tbody");
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td contenteditable="true">${new Date().toLocaleString("ar-EG")}</td>
+    <td contenteditable="true">إضافة</td>
+    <td contenteditable="true">${amount.toLocaleString()}</td>
+    <td contenteditable="true">${source}</td>
+  `;
+  table.insertBefore(row, table.firstChild);
+
+  addAmountInput.value = "";
+  document.getElementById("safeSource").value = "";
+}
+
+// تعديل دالة خصم القاصة لتسجيل الخصم كمصدر تلقائي
+const originalCalculateAndSave = calculateAndSave;
+calculateAndSave = function() {
+  const username = document.getElementById("username").value;
+  const ref = document.getElementById("ref").value;
+  const accountant = document.getElementById("accountant").value;
+  const pointsInput = document.getElementById("points");
+  const points = parseInt(pointsInput.value.replace(/[^\d]/g, "")) || 0;
+  const resultElem = document.getElementById("result");
+  const notifyElem = document.getElementById("notification");
+  notifyElem.textContent = "";
+
+  if (!points || points <= 0) {
+    resultElem.innerText = "❗ يرجى إدخال عدد نقاط صحيح.";
+    return;
+  }
+
+  const price = Math.round((points / 5000) * 1320);
+  const safeInput = document.getElementById("safeAmount");
+  let safeAmount = parseInt(safeInput.value.replace(/[^\d]/g, "")) || 0;
+
+  if (price > safeAmount) {
+    resultElem.innerText = "❗ لا يوجد رصيد كافٍ في القاصة.";
+    return;
+  }
+
+  // خصم السعر من القاصة
+  safeAmount -= price;
+  safeInput.value = safeAmount.toLocaleString();
+
+  // سجل خصم القاصة تلقائيًا
+  const table = document.querySelector("#safeLogTable tbody");
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td contenteditable="true">${new Date().toLocaleString("ar-EG")}</td>
+    <td contenteditable="true">خصم</td>
+    <td contenteditable="true">${price.toLocaleString()}</td>
+    <td contenteditable="true">${accountant}</td>
+  `;
+  table.insertBefore(row, table.firstChild);
+
+  resultElem.innerText = price.toLocaleString() + " دينار";
+  notifyElem.textContent = "✅ تم احتساب السعر وإضافته إلى السجل بنجاح.";
+
+  const logTable = document.querySelector("#logTable tbody");
+  const logRow = document.createElement("tr");
+  logRow.innerHTML = `
+    <td>${new Date().toLocaleString("ar-EG")}</td>
+    <td>${username}</td>
+    <td>${ref}</td>
+    <td>${points.toLocaleString()}</td>
+    <td>${price.toLocaleString()}</td>
+    <td>—</td>
+  `;
+  logTable.insertBefore(logRow, logTable.firstChild);
+  reviewUsed = false;
+  document.getElementById("reviewBtn").disabled = false;
+  pointsInput.value = "";
+};
+
+
+document.addEventListener("keydown", function(e) {
+  const active = document.activeElement;
+  if (!active || !active.isContentEditable) return;
+
+  const td = active;
+  const tr = td.parentElement;
+  const rowIndex = tr.rowIndex;
+  const cellIndex = td.cellIndex;
+
+  let target;
+  if (e.key === "ArrowDown") {
+    const nextRow = tr.nextElementSibling;
+    if (nextRow) target = nextRow.cells[cellIndex];
+  } else if (e.key === "ArrowUp") {
+    const prevRow = tr.previousElementSibling;
+    if (prevRow && prevRow.rowIndex > 0) target = prevRow.cells[cellIndex];
+  } else if (e.key === "ArrowLeft") {
+    if (cellIndex > 0) target = tr.cells[cellIndex - 1];
+  } else if (e.key === "ArrowRight") {
+    if (cellIndex < tr.cells.length - 1) target = tr.cells[cellIndex + 1];
+  }
+
+  if (target && target.isContentEditable) {
+    e.preventDefault();
+    target.focus();
+  }
+});
+
+</script>
+
+
+</body></html>
